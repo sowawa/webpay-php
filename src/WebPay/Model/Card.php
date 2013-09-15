@@ -2,16 +2,13 @@
 
 namespace WebPay\Model;
 
-class Charge {
+class Card {
 
     /** @var array */
     private $data;
 
     public function __construct($data)
     {
-        if ($data['card']) {
-            $data['card'] = new Card($data['card']);
-        }
         $this->data = $data;
     }
 

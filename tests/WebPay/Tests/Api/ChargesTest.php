@@ -24,5 +24,6 @@ class ChargesTest extends \WebPay\Tests\WebPayTestCase
 
         $this->assertEquals($charge->id, 'ch_2SS17Oh1r8d2djE');
         $this->assertEquals($charge->description, 'Test Charge from Java');
+        $this->assertEquals($charge->card->name, 'YUUKO SHIONJI');
     }
 }
