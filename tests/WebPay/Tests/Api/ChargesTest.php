@@ -84,7 +84,7 @@ class ChargesTest extends \WebPay\Tests\WebPayTestCase
         $charge->refund(400);
 
         $this->assertEquals(true, $charge->refunded);
-        $this->assertEquals(400, $charge->amount_refunded);
+        $this->assertEquals(400, $charge->amountRefunded);
 
         $this->assertPost('/charges/' . $id . '/refund', array('amount' => 400));
     }
