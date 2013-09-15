@@ -40,4 +40,23 @@ class ChargesTest extends \WebPay\Tests\WebPayTestCase
 
         $this->assertGet('/charges/'.$id);
     }
+
+    public function testAll()
+    {
+        $this->mock('charges/all');
+        $params = array(
+            'count' => 3,
+            'offset' => 0,
+            'created' => array(
+                'gt' => 1378000000,
+            ),
+        );
+        $charges = $this->webpay->charges->all($params);
+
+        $this->assertEquals('/v1/charges', $charges->url);
+        $this->assertEquals('Test Charge from Java', $charges->data[0]->description);
+        $this->assertEquals('KEI KUBO', $charges->data[0]->card->name);
+
+        $this->assertGet('/charges', $params);
+    }
 }

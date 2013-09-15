@@ -3,6 +3,7 @@
 namespace WebPay\Api;
 
 use WebPay\Model\Charge;
+use WebPay\Model\EntityList;
 
 class Charges {
 
@@ -37,5 +38,16 @@ class Charges {
     public function retrieve($id)
     {
         return new Charge($this->client->request('charges.retrieve', array('id' => $id)));
+    }
+
+    /**
+     * Get a list of existing charges
+     *
+     * @param array $params
+     * @return EntityList
+     */
+    public function all(array $params)
+    {
+        return new EntityList($this->client->request('charges.all', $params));
     }
 }
