@@ -41,6 +41,19 @@ class ChargesTest extends \WebPay\Tests\WebPayTestCase
         $this->assertGet('/charges/'.$id);
     }
 
+    /**
+     * @expectedException \WebPay\Exception\InvalidRequestException
+     */
+    public function testRetrieveWithEmptyString()
+    {
+        try {
+            $charge = $this->webpay->charges->retrieve('');
+        } catch (\WebPay\Exception\InvalidRequestException $e) {
+            $this->assertEquals('id must not be empty', $e->getMessage());
+            throw $e;
+        }
+    }
+
     public function testAll()
     {
         $this->mock('charges/all');

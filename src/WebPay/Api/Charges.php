@@ -37,6 +37,7 @@ class Charges {
      */
     public function retrieve($id)
     {
+        $this->assertId($id);
         return new Charge($this->client, $this->client->request('charges.retrieve', array('id' => $id)));
     }
 
@@ -60,6 +61,7 @@ class Charges {
      */
     public function refund($id, $amount = null)
     {
+        $this->assertId($id);
         if (is_null($amount)) {
             $param = array('id' => $id);
         } else {
@@ -77,11 +79,19 @@ class Charges {
      */
     public function capture($id, $amount = null)
     {
+        $this->assertId($id);
         if (is_null($amount)) {
             $param = array('id' => $id);
         } else {
             $param = array('id' => $id, 'amount' => $amount);
         }
         return new Charge($this->client, $this->client->request('charges.capture', $param));
+    }
+
+    private function assertId($id)
+    {
+        if (!is_string($id) || empty($id)) {
+            throw \WebPay\Exception\InvalidRequestException::emptyIdException();
+        }
     }
 }
