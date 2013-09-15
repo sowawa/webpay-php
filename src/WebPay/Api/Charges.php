@@ -27,4 +27,15 @@ class Charges {
     {
         return new Charge($this->client->request('charges.create', $params));
     }
+
+    /**
+     * Retrieve an existing charge
+     *
+     * @param string $id
+     * @return Charge
+     */
+    public function retrieve($id)
+    {
+        return new Charge($this->client->request('charges.retrieve', array('id' => $id)));
+    }
 }

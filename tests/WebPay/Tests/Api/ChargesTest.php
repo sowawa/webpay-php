@@ -29,4 +29,15 @@ class ChargesTest extends \WebPay\Tests\WebPayTestCase
 
         $this->assertRequest('/charges', $params);
     }
+
+    public function testRetrieve()
+    {
+        $this->mock('charges/retrieve');
+        $id = 'ch_bWp5EG9smcCYeEx';
+        $charge = $this->webpay->charges->retrieve($id);
+
+        $this->assertEquals($id, $charge->id);
+
+        $this->assertRequest('/charges/'.$id, null);
+    }
 }

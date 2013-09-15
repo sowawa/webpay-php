@@ -30,6 +30,8 @@ class WebPayTestCase extends \Guzzle\Tests\GuzzleTestCase
         $this->assertEquals($request->getHost(), 'api.example.com');
         $this->assertEquals($request->getPath(), '/v1' . $path);
         $this->assertEquals($request->getUsername(), 'test_key');
-        $this->assertEquals($request->getPostFields()->toArray(), $params);
+        if ($params != null && is_array($params)) {
+            $this->assertEquals($request->getPostFields()->toArray(), $params);
+        }
     }
 }
