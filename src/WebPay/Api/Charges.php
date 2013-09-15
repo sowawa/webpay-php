@@ -26,7 +26,7 @@ class Charges {
      */
     public function create(array $params)
     {
-        return new Charge($this->client->request('charges.create', $params));
+        return new Charge($this->client, $this->client->request('charges.create', $params));
     }
 
     /**
@@ -37,7 +37,7 @@ class Charges {
      */
     public function retrieve($id)
     {
-        return new Charge($this->client->request('charges.retrieve', array('id' => $id)));
+        return new Charge($this->client, $this->client->request('charges.retrieve', array('id' => $id)));
     }
 
     /**
@@ -48,6 +48,6 @@ class Charges {
      */
     public function all(array $params)
     {
-        return new EntityList($this->client->request('charges.all', $params));
+        return new EntityList($this->client, $this->client->request('charges.all', $params));
     }
 }
