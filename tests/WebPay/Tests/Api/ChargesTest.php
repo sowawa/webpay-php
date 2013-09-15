@@ -9,7 +9,7 @@ class ChargesTest extends \WebPay\Tests\WebPayTestCase
     {
         $this->mock('charges/create');
 
-        $charge = $this->webpay->charges->create(array(
+        $params = array(
             'amount' => 1000,
             'currency' => "jpy",
             'card' => array(
@@ -20,10 +20,13 @@ class ChargesTest extends \WebPay\Tests\WebPayTestCase
                 'name' => "YUUKO SHIONJI",
             ),
             'description' => "Test Charge from Java",
-        ));
+        );
+        $charge = $this->webpay->charges->create($params);
 
         $this->assertEquals($charge->id, 'ch_2SS17Oh1r8d2djE');
         $this->assertEquals($charge->description, 'Test Charge from Java');
         $this->assertEquals($charge->card->name, 'YUUKO SHIONJI');
+
+        $this->assertRequest('/charges', $params);
     }
 }
