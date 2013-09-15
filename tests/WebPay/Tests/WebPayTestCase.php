@@ -23,15 +23,30 @@ class WebPayTestCase extends \Guzzle\Tests\GuzzleTestCase
         array_push($this->plugins, $plugin);
     }
 
-    protected function assertRequest($path, $params)
+    protected function assertPost($path, $params)
     {
         $requests = $this->plugins[0]->getReceivedRequests();
         $request = $requests[0];
-        $this->assertEquals($request->getHost(), 'api.example.com');
-        $this->assertEquals($request->getPath(), '/v1' . $path);
-        $this->assertEquals($request->getUsername(), 'test_key');
+        $this->assertRequest($request, $path);
         if ($params != null && is_array($params)) {
-            $this->assertEquals($request->getPostFields()->toArray(), $params);
+            $this->assertEquals($params, $request->getPostFields()->toArray());
         }
+    }
+
+    protected function assertGet($path, $params = null)
+    {
+        $requests = $this->plugins[0]->getReceivedRequests();
+        $request = $requests[0];
+        $this->assertRequest($request, $path);
+        if ($params != null && is_array($params)) {
+            $this->assertEquals($params, $request->getQuery()->toArray());
+        }
+    }
+
+    private function assertRequest($request, $path)
+    {
+        $this->assertEquals('api.example.com', $request->getHost());
+        $this->assertEquals('/v1' . $path, $request->getPath());
+        $this->assertEquals('test_key', $request->getUsername());
     }
 }
