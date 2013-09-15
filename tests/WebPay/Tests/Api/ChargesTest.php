@@ -59,4 +59,35 @@ class ChargesTest extends \WebPay\Tests\WebPayTestCase
 
         $this->assertGet('/charges', $params);
     }
+
+
+    public function testRefund()
+    {
+        $this->mock('charges/retrieve');
+        $id = 'ch_bWp5EG9smcCYeEx';
+        $charge = $this->webpay->charges->retrieve($id);
+
+        $this->mock('charges/refund');
+        $charge->refund(400);
+
+        $this->assertEquals(true, $charge->refunded);
+        $this->assertEquals(400, $charge->amount_refunded);
+
+        $this->assertPost('/charges/' . $id . '/refund', array('amount' => 400));
+    }
+
+    public function testRefundWithoutAmount()
+    {
+        $this->mock('charges/retrieve');
+        $id = 'ch_bWp5EG9smcCYeEx';
+        $charge = $this->webpay->charges->retrieve($id);
+
+        $this->mock('charges/refund');
+        $charge->refund();
+
+        $this->assertEquals(true, $charge->refunded);
+        $this->assertEquals(400, $charge->amount_refunded);
+
+        $this->assertPost('/charges/' . $id . '/refund', array());
+    }
 }

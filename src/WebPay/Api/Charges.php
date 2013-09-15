@@ -50,4 +50,21 @@ class Charges {
     {
         return new EntityList($this->client, $this->client->request('charges.all', $params));
     }
+
+    /**
+     * Refund the charge specified by id
+     *
+     * @param string  $id     The charge to refund
+     * @param integer $amount Amount to refund. Default is all.
+     * @return Charge
+     */
+    public function refund($id, $amount = null)
+    {
+        if (is_null($amount)) {
+            $param = array('id' => $id);
+        } else {
+            $param = array('id' => $id, 'amount' => $amount);
+        }
+        return new Charge($this->client, $this->client->request('charges.refund', $param));
+    }
 }

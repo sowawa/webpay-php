@@ -7,7 +7,7 @@ use WebPay\WebPay;
 class WebPayTestCase extends \Guzzle\Tests\GuzzleTestCase
 {
     protected $webpay;
-    protected $plugins;
+    protected $lastPlugin;
 
     public function setup()
     {
@@ -17,15 +17,14 @@ class WebPayTestCase extends \Guzzle\Tests\GuzzleTestCase
 
     protected function mock($file)
     {
-        $plugin = new \Guzzle\Plugin\Mock\MockPlugin();
+        $this->lastPlugin = $plugin = new \Guzzle\Plugin\Mock\MockPlugin();
         $plugin->addResponse(__DIR__ . '/../../mock/' . $file . '.txt');
         $this->webpay->addSubscriber($plugin);
-        array_push($this->plugins, $plugin);
     }
 
     protected function assertPost($path, $params)
     {
-        $requests = $this->plugins[0]->getReceivedRequests();
+        $requests = $this->lastPlugin->getReceivedRequests();
         $request = $requests[0];
         $this->assertRequest($request, $path);
         if ($params != null && is_array($params)) {
@@ -35,7 +34,7 @@ class WebPayTestCase extends \Guzzle\Tests\GuzzleTestCase
 
     protected function assertGet($path, $params = null)
     {
-        $requests = $this->plugins[0]->getReceivedRequests();
+        $requests = $this->lastPlugin->getReceivedRequests();
         $request = $requests[0];
         $this->assertRequest($request, $path);
         if ($params != null && is_array($params)) {

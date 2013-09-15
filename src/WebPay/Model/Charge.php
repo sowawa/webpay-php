@@ -11,4 +11,16 @@ class Charge extends Entity {
         }
         parent::__construct($client, $data);
     }
+
+    /**
+     * Refund this charge
+     *
+     * @param integer $amount Amount to refund. Default is all.
+     * @return self
+     */
+    public function refund($amount = null)
+    {
+        $this->data = $this->client->charges->refund($this->id, $amount)->data;
+        return $this;
+    }
 }
