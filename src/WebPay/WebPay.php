@@ -59,4 +59,15 @@ class WebPay {
         $command = $this->client->getCommand($command, $params);
         return $command->execute();
     }
+
+    /**
+     * Add a guzzle plugin to the client.
+     * This is mainly for testing, but also useful for logging, validation, etc.
+     *
+     * @param mixed $plugin A guzzle plugin
+     */
+    public function addSubscriber($plugin)
+    {
+        $this->client->addSubscriber($plugin);
+    }
 }
