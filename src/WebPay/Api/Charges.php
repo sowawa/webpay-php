@@ -67,4 +67,21 @@ class Charges {
         }
         return new Charge($this->client, $this->client->request('charges.refund', $param));
     }
+
+    /**
+     * Capture the charge specified by id
+     *
+     * @param string  $id     The charge to capture
+     * @param integer $amount Amount to capture. Default is all.
+     * @return Charge
+     */
+    public function capture($id, $amount = null)
+    {
+        if (is_null($amount)) {
+            $param = array('id' => $id);
+        } else {
+            $param = array('id' => $id, 'amount' => $amount);
+        }
+        return new Charge($this->client, $this->client->request('charges.capture', $param));
+    }
 }

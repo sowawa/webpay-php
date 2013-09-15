@@ -90,4 +90,21 @@ class ChargesTest extends \WebPay\Tests\WebPayTestCase
 
         $this->assertPost('/charges/' . $id . '/refund', array());
     }
+
+    public function testCapture()
+    {
+        $this->mock('charges/retrieve_not_captured');
+        $id = 'ch_2X01NDedxdrRcA3';
+        $charge = $this->webpay->charges->retrieve($id);
+        $this->assertEquals(false, $charge->captured);
+
+        $this->mock('charges/capture');
+        $charge->capture(1000);
+
+        $this->assertEquals(true, $charge->captured);
+        $this->assertEquals(true, $charge->paid);
+        $this->assertEquals(1000, $charge->amount);
+
+        $this->assertPost('/charges/' . $id . '/capture', array('amount' => 1000));
+    }
 }

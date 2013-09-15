@@ -23,4 +23,16 @@ class Charge extends Entity {
         $this->data = $this->client->charges->refund($this->id, $amount)->data;
         return $this;
     }
+
+    /**
+     * Capture this charge
+     *
+     * @param integer $amount Amount to capture. Default is all.
+     * @return self
+     */
+    public function capture($amount = null)
+    {
+        $this->data = $this->client->charges->capture($this->id, $amount)->data;
+        return $this;
+    }
 }
