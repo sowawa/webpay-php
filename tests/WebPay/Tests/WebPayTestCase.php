@@ -42,6 +42,13 @@ class WebPayTestCase extends \Guzzle\Tests\GuzzleTestCase
         }
     }
 
+    protected function assertDelete($path)
+    {
+        $requests = $this->lastPlugin->getReceivedRequests();
+        $request = $requests[0];
+        $this->assertRequest($request, $path);
+    }
+
     private function assertRequest($request, $path)
     {
         $this->assertEquals('api.example.com', $request->getHost());
