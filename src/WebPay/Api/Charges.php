@@ -5,17 +5,14 @@ namespace WebPay\Api;
 use WebPay\Model\Charge;
 use WebPay\Model\EntityList;
 
-class Charges {
-
-    /** @var WebPay */
-    private $client;
+class Charges extends Accessor {
 
     /**
      * @param WebPay $client
      */
     public function __construct($client)
     {
-        $this->client = $client;
+        parent::__construct($client);
     }
 
     /**
@@ -86,12 +83,5 @@ class Charges {
             $param = array('id' => $id, 'amount' => $amount);
         }
         return new Charge($this->client, $this->client->request('charges.capture', $param));
-    }
-
-    private function assertId($id)
-    {
-        if (!is_string($id) || empty($id)) {
-            throw \WebPay\Exception\InvalidRequestException::emptyIdException();
-        }
     }
 }
