@@ -8,6 +8,7 @@ use Guzzle\Service\Description\ServiceDescription;
 
 use WebPay\Api\Charges;
 use WebPay\Api\Customers;
+use WebPay\Api\Tokens;
 
 class WebPay {
 
@@ -19,6 +20,9 @@ class WebPay {
 
     /** @var Customers */
     private $customers;
+
+    /** @var Tokens */
+    private $tokens;
 
     /**
      * @param string $apiKey  Your secret API key
@@ -34,6 +38,7 @@ class WebPay {
 
         $this->charges = new Charges($this);
         $this->customers = new Customers($this);
+        $this->tokens = new Tokens($this);
     }
 
     public function __get($key)
