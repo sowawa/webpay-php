@@ -8,6 +8,7 @@ use Guzzle\Service\Description\ServiceDescription;
 
 use WebPay\Api\Charges;
 use WebPay\Api\Customers;
+use WebPay\Api\Events;
 use WebPay\Api\Tokens;
 
 class WebPay {
@@ -20,6 +21,9 @@ class WebPay {
 
     /** @var Customers */
     private $customers;
+
+    /** @var Events */
+    private $events;
 
     /** @var Tokens */
     private $tokens;
@@ -38,6 +42,7 @@ class WebPay {
 
         $this->charges = new Charges($this);
         $this->customers = new Customers($this);
+        $this->events = new Events($this);
         $this->tokens = new Tokens($this);
     }
 

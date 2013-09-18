@@ -36,4 +36,29 @@ abstract class AbstractModel {
         };
         return preg_replace_callback('/([A-Z])/', $proc ,$str);
     }
+
+    // WebPay -> array -> Entity
+    protected function dataToObjectConverter($client) {
+        return function(array $item) use ($client) {
+            switch ($item['object']) {
+            case 'charge':
+                return new Charge($client, $item);
+                break;
+            case 'customer':
+                return new Customer($client, $item);
+                break;
+            case 'event':
+                return new Event($client, $item);
+                break;
+            case 'token':
+                return new Token($client, $item);
+                break;
+            case 'account':
+                return new Account($client, $item);
+                break;
+            default:
+                // TODO: use APIConnectionError;
+            }
+        };
+    }
 }
