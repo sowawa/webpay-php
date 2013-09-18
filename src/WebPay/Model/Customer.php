@@ -18,7 +18,7 @@ class Customer extends Entity {
 
     public function __construct($client, $data)
     {
-        if ($data['active_card']) {
+        if (array_key_exists('active_card', $data) && !empty($data['active_card'])) {
             $data['active_card'] = new Card($data['active_card']);
         }
         parent::__construct($client, $data);
