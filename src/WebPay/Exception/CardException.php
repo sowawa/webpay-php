@@ -2,27 +2,20 @@
 
 namespace WebPay\Exception;
 
-class InvalidRequestException extends WebPayException {
+class CardException extends WebPayException {
 
     /** @var string */
     private $type;
 
+    /**
+     * @var string
+     *
+     * PHP's Exception class has $code, so that name is not available for this purpose.
+     */
+    private $cardErrorCode;
+
     /** @var string */
     private $param;
-
-    /**
-     * Create a fake InvalidRequestException to indicate the given id is invalid
-     *
-     * @return InvalidRequestException
-     */
-    static public function emptyIdException()
-    {
-        return new self(null, array(
-            'message' => 'id must not be empty',
-            'type' => 'invalid_request_error',
-            'param' => 'id'
-        ));
-    }
 
     /**
      * @param integer $status
@@ -32,6 +25,7 @@ class InvalidRequestException extends WebPayException {
     {
         parent::__construct($errorInfo['message'], $status, $errorInfo);
         $this->type = $errorInfo['type'];
+        $this->cardErrorCode = $errorInfo['code'];
         $this->param = $errorInfo['param'];
     }
 
@@ -41,6 +35,14 @@ class InvalidRequestException extends WebPayException {
     public function getType()
     {
         return $this->type;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCardErrorCode()
+    {
+        return $this->cardErrorCode;
     }
 
     /**

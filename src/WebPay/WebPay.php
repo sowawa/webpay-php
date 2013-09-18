@@ -12,6 +12,9 @@ use WebPay\Api\Events;
 use WebPay\Api\Tokens;
 use WebPay\Api\Account;
 
+use WebPay\Exception\WebPayException;
+use WebPay\Exception\APIConnectionException;
+
 class WebPay {
 
     /** @var Client */
@@ -43,6 +46,8 @@ class WebPay {
         $this->client->setDescription($description);
         $this->client->setBaseUrl($apiBase);
         $this->client->setDefaultOption('auth', array($apiKey, '', 'Basic'));
+        $this->client->getEventDispatcher()->addListener('request.error', array($this, 'onRequestError'));
+        $this->client->getEventDispatcher()->addListener('request.exception', array($this, 'onRequestException'));
 
         $this->charges = new Charges($this);
         $this->customers = new Customers($this);
@@ -77,7 +82,12 @@ class WebPay {
     public function request($command, array $params)
     {
         $command = $this->client->getCommand($command, $params);
-        return $command->execute();
+        try {
+            return $command->execute();
+        } catch (\Guzzle\Common\Exception\RuntimeException $e) {
+            $message = 'Guzzle throws exception: ' . $e->getMessage();
+            throw new APIConnectionException($message, null, null, $e);
+        }
     }
 
     /**
@@ -89,5 +99,35 @@ class WebPay {
     public function addSubscriber($plugin)
     {
         $this->client->addSubscriber($plugin);
+    }
+
+    /**
+     * @param Event $event
+     * @throws WebPayException
+     */
+    public function onRequestError(Event $event)
+    {
+        throw WebPayException::exceptionFromResponse($event['response']);
+    }
+
+    /**
+     * @param Event $event
+     * @throws APIConnectionException
+     */
+    public function onRequestException(Event $event)
+    {
+        $cause = $event['exception'];
+        $message = 'HTTP connection throws exception: ' . (isset($cause) ? $cause->getMessage() : '(exception is not available)');
+
+       if (isset($event['response'])) {
+            $response = $event['response'];
+            $status = $response->getStatusCode();
+            $data = $response->json();
+            $error = isset($data['error']) ? $data['error'] : null;
+
+            throw new APIConnectionException($message, $status, $error, $cause);
+        } else {
+            throw new APIConnectionException($message, null, null, $cause);
+        }
     }
 }

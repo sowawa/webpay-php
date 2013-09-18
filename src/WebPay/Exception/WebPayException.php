@@ -21,4 +21,45 @@ class WebPayException extends \Exception {
         $this->status = $status;
         $this->errorInfo = $errorInfo;
     }
+
+    /**
+     * Create Exception object from response
+     *
+     * @param \Guzzle\Http\Message\Response $response
+     * @return WebPayException
+     */
+    public static function exceptionFromResponse($response)
+    {
+        $status = $response->getStatusCode();
+        $data = $response->json();
+        $errorInfo = isset($data['error']) ? $data['error'] : null;
+
+        switch ($status) {
+        case 400:
+        case 404:
+            return new InvalidRequestException($status, $errorInfo);
+        case 401:
+            return new AuthenticationException($status, $errorInfo);
+        case 402:
+            return new CardException($status, $errorInfo);
+        default:
+            return new APIException($status, $errorInfo);
+        }
+    }
+
+    /**
+     * @return integer
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * @return array
+     */
+    public function getErrorInfo()
+    {
+        return $this->errorInfo;
+    }
 }

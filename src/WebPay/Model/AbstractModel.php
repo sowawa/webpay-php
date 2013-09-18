@@ -57,7 +57,7 @@ abstract class AbstractModel {
                 return new Account($client, $item);
                 break;
             default:
-                // TODO: use APIConnectionError;
+                throw new APIConnectionException('Unknown object type ' . $item['object'], null, null, null);
             }
         };
     }
