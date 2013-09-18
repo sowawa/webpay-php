@@ -13,7 +13,7 @@ abstract class Accessor {
     /**
      * @param WebPay $client
      */
-    protected function __construct($client)
+    public function __construct($client)
     {
         $this->client = $client;
     }

@@ -7,14 +7,6 @@ use WebPay\Model\Token;
 class Tokens extends Accessor {
 
     /**
-     * @param WebPay $client
-     */
-    public function __construct($client)
-    {
-        parent::__construct($client);
-    }
-
-    /**
      * Create a token
      *
      * @param array $params

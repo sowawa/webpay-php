@@ -5,14 +5,6 @@ namespace WebPay\Api;
 class Account extends Accessor {
 
     /**
-     * @param WebPay $client
-     */
-    public function __construct($client)
-    {
-        parent::__construct($client);
-    }
-
-    /**
      * Retrieve the current account
      *
      * @return Account

@@ -8,14 +8,6 @@ use WebPay\Model\EntityList;
 class Customers extends Accessor {
 
     /**
-     * @param WebPay $client
-     */
-    public function __construct($client)
-    {
-        parent::__construct($client);
-    }
-
-    /**
      * Create a customer
      *
      * @param array $params

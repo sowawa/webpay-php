@@ -8,14 +8,6 @@ use WebPay\Model\EntityList;
 class Events extends Accessor {
 
     /**
-     * @param WebPay $client
-     */
-    public function __construct($client)
-    {
-        parent::__construct($client);
-    }
-
-    /**
      * Retrieve an existing event
      *
      * @param string $id
