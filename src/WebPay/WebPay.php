@@ -10,6 +10,7 @@ use WebPay\Api\Charges;
 use WebPay\Api\Customers;
 use WebPay\Api\Events;
 use WebPay\Api\Tokens;
+use WebPay\Api\Account;
 
 class WebPay {
 
@@ -28,6 +29,9 @@ class WebPay {
     /** @var Tokens */
     private $tokens;
 
+    /** @var Account */
+    private $account;
+
     /**
      * @param string $apiKey  Your secret API key
      * @param string $apiBase Default is https://api.webpay.jp
@@ -44,6 +48,7 @@ class WebPay {
         $this->customers = new Customers($this);
         $this->events = new Events($this);
         $this->tokens = new Tokens($this);
+        $this->account = new Account($this);
     }
 
     public function __get($key)
