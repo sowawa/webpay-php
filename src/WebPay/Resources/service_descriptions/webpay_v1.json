@@ -56,7 +56,10 @@
           "location": "postField",
           "type": "boolean",
           "required": false,
-          "description": "すぐに実売上にするか、仮売上として後で実売上化するかを指定します。falseの場合に与信のみが行われ、後で「仮売上の実売上化」をすることで実売上化できます。標準で7日経つと仮売上は失効します。（設定画面から日数は変更可能です）"
+          "description": "すぐに実売上にするか、仮売上として後で実売上化するかを指定します。falseの場合に与信のみが行われ、後で「仮売上の実売上化」をすることで実売上化できます。標準で7日経つと仮売上は失効します。（設定画面から日数は変更可能です）",
+          "filters": [
+            "\\WebPay\\Api\\GuzzleFilter::booleanToStringFilter"
+          ]
         }
       }
     },
