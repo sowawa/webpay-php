@@ -25,7 +25,7 @@ class Events extends Accessor {
      * @param array $params
      * @return EntityList
      */
-    public function all(array $params)
+    public function all(array $params = array())
     {
         return new EntityList($this->client, $this->client->request('events.all', $params));
     }
