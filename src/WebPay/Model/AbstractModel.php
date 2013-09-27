@@ -61,4 +61,40 @@ abstract class AbstractModel {
             }
         };
     }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        $rawData = $this->__toArray();
+        if (defined('JSON_PRETTY_PRINT'))
+            $json = json_encode($rawData, JSON_PRETTY_PRINT);
+        else
+            $json = json_encode($rawData);
+        return get_class($this) . ' ' . $json;
+    }
+
+    /**
+     * Recursively convert internal classes to array
+     * @return array
+     */
+    public function __toArray()
+    {
+        $result = array();
+        foreach ($this->data as $k => $v) {
+            if (is_object($v))
+                $result[$k] = $v->__toArray();
+            else if (is_array($v))
+                $result[$k] = array_map(function ($vv) {
+                        if (is_object($v))
+                            return $vv->__toArray();
+                        else
+                            return $vv;
+                    },  $v);
+            else
+                $result[$k] = $v;
+        }
+        return $result;
+    }
 }
