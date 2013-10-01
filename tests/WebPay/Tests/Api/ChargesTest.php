@@ -2,7 +2,6 @@
 
 namespace WebPay\Tests\Api;
 
-
 class ChargesTest extends \WebPay\Tests\WebPayTestCase
 {
     public function testCreate()
@@ -72,7 +71,6 @@ class ChargesTest extends \WebPay\Tests\WebPayTestCase
 
         $this->assertGet('/charges', $params);
     }
-
 
     public function testRefund()
     {

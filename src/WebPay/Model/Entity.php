@@ -2,8 +2,8 @@
 
 namespace WebPay\Model;
 
-abstract class Entity extends AbstractModel {
-
+abstract class Entity extends AbstractModel
+{
     /** @var WebPay */
     protected $client;
 

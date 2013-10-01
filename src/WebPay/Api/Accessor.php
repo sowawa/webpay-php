@@ -5,8 +5,8 @@ namespace WebPay\Api;
 /**
  * Manage WebPay $client and provide utility methods
  */
-abstract class Accessor {
-
+abstract class Accessor
+{
     /** @var WebPay */
     protected $client;
 

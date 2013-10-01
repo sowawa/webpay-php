@@ -2,5 +2,6 @@
 
 namespace WebPay\Model;
 
-class Account extends Entity {
+class Account extends Entity
+{
 }

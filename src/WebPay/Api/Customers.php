@@ -5,12 +5,12 @@ namespace WebPay\Api;
 use WebPay\Model\Customer;
 use WebPay\Model\EntityList;
 
-class Customers extends Accessor {
-
+class Customers extends Accessor
+{
     /**
      * Create a customer
      *
-     * @param array $params
+     * @param  array    $params
      * @return Customer
      */
     public function create(array $params)
@@ -21,19 +21,20 @@ class Customers extends Accessor {
     /**
      * Retrieve an existing customer
      *
-     * @param string $id
+     * @param  string   $id
      * @return Customer
      */
     public function retrieve($id)
     {
         $this->assertId($id);
+
         return new Customer($this->client, $this->client->request('customers.retrieve', array('id' => $id)));
     }
 
     /**
      * Get a list of existing customers
      *
-     * @param array $params
+     * @param  array      $params
      * @return EntityList
      */
     public function all(array $params = array())
@@ -44,27 +45,29 @@ class Customers extends Accessor {
     /**
      * Update parameters of the customer specified by id
      *
-     * @param string  $id     The customer to update
-     * @param integer $params New parameters
+     * @param  string   $id     The customer to update
+     * @param  integer  $params New parameters
      * @return Customer
      */
     public function save($id, $params)
     {
         $this->assertId($id);
         $params['id'] = $id;
+
         return new Customer($this->client, $this->client->request('customers.save', $params));
     }
 
     /**
      * Delete the customer specified by id
      *
-     * @param string  $id  The customer to delete
-     * @return bool true if deletion succeeded
+     * @param  string $id The customer to delete
+     * @return bool   true if deletion succeeded
      */
     public function delete($id)
     {
         $this->assertId($id);
         $response = $this->client->request('customers.delete', array('id' => $id));
+
         return $response['deleted'];
     }
 }

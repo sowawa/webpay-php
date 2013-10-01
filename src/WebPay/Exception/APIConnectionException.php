@@ -2,14 +2,14 @@
 
 namespace WebPay\Exception;
 
-class APIConnectionException extends WebPayException {
-
+class APIConnectionException extends WebPayException
+{
     /** @var Exception */
     private $cause;
 
     /**
      * @param integer $status
-     * @param array $errorInfo
+     * @param array   $errorInfo
      */
     public function __construct($message, $status, $errorInfo, $cause)
     {

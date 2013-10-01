@@ -2,8 +2,8 @@
 
 namespace WebPay\Model;
 
-class Event extends Entity {
-
+class Event extends Entity
+{
     public function __construct($client, $data)
     {
         if (array_key_exists('data', $data) && !empty($data['data'])) {
@@ -13,8 +13,8 @@ class Event extends Entity {
     }
 }
 
-class EventData extends AbstractModel {
-
+class EventData extends AbstractModel
+{
     public function __construct($client, $data)
     {
         if (array_key_exists('object', $data)) {

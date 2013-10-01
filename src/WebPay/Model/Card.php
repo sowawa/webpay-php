@@ -2,5 +2,6 @@
 
 namespace WebPay\Model;
 
-class Card extends AbstractModel {
+class Card extends AbstractModel
+{
 }

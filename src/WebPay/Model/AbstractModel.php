@@ -2,8 +2,8 @@
 
 namespace WebPay\Model;
 
-abstract class AbstractModel {
-
+abstract class AbstractModel
+{
     /** @var array */
     protected $data;
 
@@ -30,15 +30,18 @@ abstract class AbstractModel {
         throw new \Exception($key . ' is not able to override');
     }
 
-    private function decamelize($str) {
+    private function decamelize($str)
+    {
         $proc = function ($r1) {
             return '_'.strtolower($r1[0]);
         };
+
         return preg_replace_callback('/([A-Z])/', $proc ,$str);
     }
 
     // WebPay -> array -> Entity
-    protected function dataToObjectConverter($client) {
+    protected function dataToObjectConverter($client)
+    {
         return function(array $item) use ($client) {
             switch ($item['object']) {
             case 'charge':
@@ -72,6 +75,7 @@ abstract class AbstractModel {
             $json = json_encode($rawData, JSON_PRETTY_PRINT);
         else
             $json = json_encode($rawData);
+
         return get_class($this) . ' ' . $json;
     }
 
@@ -95,6 +99,7 @@ abstract class AbstractModel {
             else
                 $result[$k] = $v;
         }
+
         return $result;
     }
 }

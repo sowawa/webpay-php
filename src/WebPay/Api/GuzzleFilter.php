@@ -5,8 +5,8 @@ namespace WebPay\Api;
 /**
  * Static filter methods for Guzzle's service description
  */
-abstract class GuzzleFilter {
-
+abstract class GuzzleFilter
+{
     /**
      * @param boolean
      * @return string

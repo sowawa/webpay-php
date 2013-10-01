@@ -2,8 +2,8 @@
 
 namespace WebPay\Model;
 
-class EntityList extends AbstractModel {
-
+class EntityList extends AbstractModel
+{
     public function __construct($client, $data)
     {
         if (array_key_exists('data', $data) && !empty($data['data'])) {
