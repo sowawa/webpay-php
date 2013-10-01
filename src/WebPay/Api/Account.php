@@ -2,8 +2,8 @@
 
 namespace WebPay\Api;
 
-class Account extends Accessor {
-
+class Account extends Accessor
+{
     /**
      * Retrieve the current account
      *
@@ -22,6 +22,7 @@ class Account extends Accessor {
     public function deleteData()
     {
         $result = $this->client->request('account.delete_data', array());
+
         return $result['deleted'];
     }
 }

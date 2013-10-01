@@ -2,8 +2,8 @@
 
 namespace WebPay\Exception;
 
-class InvalidRequestException extends WebPayException {
-
+class InvalidRequestException extends WebPayException
+{
     /** @var string */
     private $type;
 
@@ -15,7 +15,7 @@ class InvalidRequestException extends WebPayException {
      *
      * @return InvalidRequestException
      */
-    static public function emptyIdException()
+    public static function emptyIdException()
     {
         return new self(null, array(
             'message' => 'id must not be empty',
@@ -26,7 +26,7 @@ class InvalidRequestException extends WebPayException {
 
     /**
      * @param integer $status
-     * @param array $errorInfo
+     * @param array   $errorInfo
      */
     public function __construct($status, $errorInfo)
     {

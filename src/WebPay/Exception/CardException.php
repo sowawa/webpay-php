@@ -2,8 +2,8 @@
 
 namespace WebPay\Exception;
 
-class CardException extends WebPayException {
-
+class CardException extends WebPayException
+{
     /** @var string */
     private $type;
 
@@ -19,7 +19,7 @@ class CardException extends WebPayException {
 
     /**
      * @param integer $status
-     * @param array $errorInfo
+     * @param array   $errorInfo
      */
     public function __construct($status, $errorInfo)
     {

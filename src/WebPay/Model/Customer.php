@@ -2,8 +2,8 @@
 
 namespace WebPay\Model;
 
-class Customer extends Entity {
-
+class Customer extends Entity
+{
     /** var bool */
     private $updateEmail = false;
 
@@ -76,6 +76,7 @@ class Customer extends Entity {
 
         $this->data = $this->client->customers->save($this->id, $params)->data;
         $this->clearAfterSave();
+
         return $this;
     }
 

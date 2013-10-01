@@ -2,8 +2,8 @@
 
 namespace WebPay\Exception;
 
-class WebPayException extends \Exception {
-
+class WebPayException extends \Exception
+{
     /** @var integer */
     private $status;
 
@@ -11,9 +11,9 @@ class WebPayException extends \Exception {
     private $errorInfo;
 
     /**
-     * @param string $message
+     * @param string  $message
      * @param integer $status
-     * @param array $errorInfo
+     * @param array   $errorInfo
      */
     public function __construct($message, $status = null, $errorInfo = null)
     {
@@ -25,7 +25,7 @@ class WebPayException extends \Exception {
     /**
      * Create Exception object from response
      *
-     * @param \Guzzle\Http\Message\Response $response
+     * @param  \Guzzle\Http\Message\Response $response
      * @return WebPayException
      */
     public static function exceptionFromResponse($response)

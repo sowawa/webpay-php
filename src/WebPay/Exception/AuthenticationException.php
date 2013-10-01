@@ -2,11 +2,11 @@
 
 namespace WebPay\Exception;
 
-class AuthenticationException extends WebPayException {
-
+class AuthenticationException extends WebPayException
+{
     /**
      * @param integer $status
-     * @param array $errorInfo
+     * @param array   $errorInfo
      */
     public function __construct($status, $errorInfo)
     {

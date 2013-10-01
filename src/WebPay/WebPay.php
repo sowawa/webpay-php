@@ -15,8 +15,8 @@ use WebPay\Api\Account;
 use WebPay\Exception\WebPayException;
 use WebPay\Exception\APIConnectionException;
 
-class WebPay {
-
+class WebPay
+{
     /** @var Client */
     private $client;
 
@@ -102,7 +102,7 @@ class WebPay {
     }
 
     /**
-     * @param Event $event
+     * @param  Event           $event
      * @throws WebPayException
      */
     public function onRequestError(Event $event)
@@ -111,7 +111,7 @@ class WebPay {
     }
 
     /**
-     * @param Event $event
+     * @param  Event                  $event
      * @throws APIConnectionException
      */
     public function onRequestException(Event $event)

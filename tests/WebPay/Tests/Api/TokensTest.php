@@ -2,7 +2,6 @@
 
 namespace WebPay\Tests\Api;
 
-
 class TokensTest extends \WebPay\Tests\WebPayTestCase
 {
     public function testCreate()

@@ -2,7 +2,6 @@
 
 namespace WebPay\Tests\Api;
 
-
 class EventsTest extends \WebPay\Tests\WebPayTestCase
 {
     public function testRetrieve()

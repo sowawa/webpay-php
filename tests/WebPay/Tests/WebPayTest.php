@@ -2,7 +2,6 @@
 
 namespace WebPay\Tests;
 
-
 class WebPayTest extends \WebPay\Tests\WebPayTestCase
 {
     /**
