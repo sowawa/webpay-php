@@ -13,7 +13,7 @@ abstract class GuzzleFilter
      */
     public static function booleanToStringFilter($value)
     {
-        if ($value == true)
+        if ($value === true)
             return "true";
         else
             return "false";
