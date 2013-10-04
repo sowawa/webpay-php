@@ -11,3 +11,8 @@ before_script:
 
 script:
   - php vendor/bin/phpunit -c phpunit.xml.dist
+
+notifications:
+  hipchat:
+    rooms:
+      secure: Di57aLpGum5Fi0tLWGE+rHrtOxJQq92i/Nau3p5WJ8tP7ev1nOT9PM+q/XIygLXrWZvl5pH6VLbxk5yY7hjg+nZgHvZMHmYKbNKzQ9RxwsFDiNr3Rz01ANPT2S+DdcY8vP8RjsoS8BitnPELSPQvlgYCdoeQIUvkBs5HtoBNTvg=
