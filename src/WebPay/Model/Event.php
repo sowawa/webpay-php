@@ -12,15 +12,3 @@ class Event extends Entity
         parent::__construct($client, $data);
     }
 }
-
-class EventData extends AbstractModel
-{
-    public function __construct($client, $data)
-    {
-        if (array_key_exists('object', $data)) {
-            $converter = $this->dataToObjectConverter($client);
-            $data['object'] = $converter($data['object']);
-        }
-        parent::__construct($data);
-    }
-}
