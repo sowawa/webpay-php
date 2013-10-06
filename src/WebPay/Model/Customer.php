@@ -16,7 +16,7 @@ class Customer extends Entity
     /** var array */
     private $newCard = null;
 
-    public function __construct($client, $data)
+    public function __construct(\WebPay\WebPay $client, array $data)
     {
         if (array_key_exists('active_card', $data) && !empty($data['active_card'])) {
             $data['active_card'] = new Card($data['active_card']);

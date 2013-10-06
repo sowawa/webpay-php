@@ -11,9 +11,9 @@ abstract class Accessor
     protected $client;
 
     /**
-     * @param WebPay $client
+     * @param \WebPay\WebPay $client
      */
-    public function __construct($client)
+    public function __construct(\WebPay\WebPay $client)
     {
         $this->client = $client;
     }

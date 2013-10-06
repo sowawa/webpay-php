@@ -28,7 +28,7 @@ class WebPayException extends \Exception
      * @param  \Guzzle\Http\Message\Response $response
      * @return WebPayException
      */
-    public static function exceptionFromResponse($response)
+    public static function exceptionFromResponse(\Guzzle\Http\Message\Response $response)
     {
         $status = $response->getStatusCode();
         $data = $response->json();

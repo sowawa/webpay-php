@@ -7,7 +7,7 @@ abstract class AbstractModel
     /** @var array */
     protected $data;
 
-    public function __construct($data)
+    public function __construct(array $data)
     {
         $this->data = $data;
     }
@@ -40,7 +40,7 @@ abstract class AbstractModel
     }
 
     // WebPay -> array -> Entity
-    protected function dataToObjectConverter($client)
+    protected function dataToObjectConverter(\WebPay\WebPay $client)
     {
         return function(array $item) use ($client) {
             switch ($item['object']) {
