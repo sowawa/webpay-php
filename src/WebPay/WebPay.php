@@ -20,20 +20,8 @@ class WebPay
     /** @var Client */
     private $client;
 
-    /** @var Charges */
-    private $charges;
-
-    /** @var Customers */
-    private $customers;
-
-    /** @var Events */
-    private $events;
-
-    /** @var Tokens */
-    private $tokens;
-
-    /** @var Account */
-    private $account;
+    /** @var array */
+    protected $accessors;
 
     /**
      * @param string $apiKey  Your secret API key
@@ -49,18 +37,24 @@ class WebPay
         $this->client->getEventDispatcher()->addListener('request.error', array($this, 'onRequestError'));
         $this->client->getEventDispatcher()->addListener('request.exception', array($this, 'onRequestException'));
 
-        $this->charges = new Charges($this);
-        $this->customers = new Customers($this);
-        $this->events = new Events($this);
-        $this->tokens = new Tokens($this);
-        $this->account = new Account($this);
+        $this->registerAccessor('charges', new Charges());
+        $this->registerAccessor('customers', new Customers());
+        $this->registerAccessor('events', new Events());
+        $this->registerAccessor('tokens', new Tokens());
+        $this->registerAccessor('account', new Account());
+    }
+
+    public function registerAccessor($name, Api\AccessorInterface $accessor)
+    {
+        $accessor->setClient($this);
+        $this->accessors[$name] = $accessor;
     }
 
     public function __get($key)
     {
-        $accessors = array('charges', 'customers', 'events', 'tokens', 'account');
-        if (in_array($key, $accessors) && property_exists($this, $key)) {
-            return $this->{$key};
+        $accessor_keys = array('charges', 'customers', 'events', 'tokens', 'account');
+        if (in_array($key, $accessor_keys)) {
+            return $this->accessors[$key];
         } else {
             throw new \Exception('Unknown accessor ' . $key);
         }
