@@ -118,4 +118,12 @@ class WebPayTest extends \WebPay\Tests\WebPayTestCase
             throw $e;
         }
     }
+
+    public function testDefaultBaseUrl()
+    {
+        $webpay = new \WebPay\WebPay('');
+        $prop = new \ReflectionProperty('\WebPay\WebPay', 'client');
+        $prop->setAccessible(true);
+        $this->assertEquals('https://api.webpay.jp', $prop->getValue($webpay)->getBaseUrl());
+    }
 }
